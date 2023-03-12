@@ -1,0 +1,19 @@
+<!--<?xml version="1.0" encoding="UTF-8" ?>-->
+<!--<!DOCTYPE configuration-->
+<!--    PUBLIC "-//mybatis.org//DTD Config 3.0//EN"-->
+<!--    "http://mybatis.org/dtd/mybatis-3-config.dtd">-->
+<!--<configuration>-->
+<!--  &lt;!&ndash; 这个文件还要 &ndash;&gt;-->
+<!--    &lt;!&ndash; 这里面的代码几乎全部整合到 spring 核心文件中了 &ndash;&gt;-->
+
+
+
+<!--  &lt;!&ndash; 加载映射文件 &ndash;&gt;-->
+<!--&lt;!&ndash;  <mappers>&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;    <mapper resource="com/itheima/mapper/UserMapper.xml"/>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;    <mapper resource="com/itheima/mapper/OrdersMapper.xml"/>&ndash;&gt;&ndash;&gt;-->
+
+<!--&lt;!&ndash;    &lt;!&ndash; Mapper代理方式 &ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;    <package name="com.itheima.mapper"/>&ndash;&gt;-->
+<!--&lt;!&ndash;  </mappers>&ndash;&gt;-->
+<!--</configuration>-->

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation=
+           "http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+
+
+  <!--   注解扫描 -->
+  <context:component-scan base-package="com.itheima.anno"/>
+
+  <!-- 注解开发 Aop -->
+  <aop:aspectj-autoproxy/>
+
+<!--  &lt;!&ndash; aop   (前置，后置....)增强 &ndash;&gt;-->
+<!--  &lt;!&ndash; 目标对象 &ndash;&gt;-->
+<!--  <bean id="target" class="com.itheima.aop.Target"/>-->
+<!--  &lt;!&ndash; 切面对象 &ndash;&gt;-->
+<!--  <bean id="myAspect" class="com.itheima.aop.MyAspect"/>-->
+<!--  &lt;!&ndash; 配置织入: 告诉spring框架 那些方法需要进行那些增强(前置，后置....) &ndash;&gt;-->
+<!--  <aop:config>-->
+<!--  &lt;!&ndash; 声明切面 &ndash;&gt;-->
+<!--  <aop:aspect ref="myAspect">-->
+<!--    &lt;!&ndash; 抽取切点表达式 &ndash;&gt;-->
+<!--    <aop:pointcut id="myPointcut" expression="execution(* com.itheima.aop.*.*(..))"/>-->
+<!--    &lt;!&ndash; 切面: 切点 + 通知 &ndash;&gt;-->
+<!--    &lt;!&ndash; before(前置) 前置增强  切面中的before方法           增强到这个路径下的save()方法这-->
+<!--                             当指定的save()方法执行时，他就会前置增强(执行切面对象中的before(参数...)方法)-->
+<!--                                                                        &ndash;&gt;-->
+<!--&lt;!&ndash;    <aop:before method="before" pointcut="execution(public void com.itheima.aop.Target.save())" />&ndash;&gt;-->
+<!--    <aop:before method="before" pointcut-ref="myPointcut" />-->
+<!--    <aop:after-returning method="aftweRetuming" pointcut-ref="myPointcut" />-->
+
+<!--    &lt;!&ndash; 可多个 &ndash;&gt;-->
+<!--  </aop:aspect>-->
+<!--</aop:config>-->
+
+
+</beans>

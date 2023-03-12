@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation=
+           "http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+
+  <!-- aop   (前置，后置....)增强 -->
+  <!-- 目标对象 -->
+  <bean id="target" class="com.itheima.aop.Target"/>
+  <!-- 切面对象 -->
+  <bean id="myAspect" class="com.itheima.aop.MyAspect"/>
+  <!-- 配置织入: 告诉spring框架 那些方法需要进行那些增强(前置，后置....) -->
+  <aop:config>
+  <!-- 声明切面 -->
+  <aop:aspect ref="myAspect">
+    <!-- 抽取切点表达式 -->
+    <aop:pointcut id="myPointcut" expression="execution(* com.itheima.aop.*.*(..))"/>
+    <!-- 切面: 切点 + 通知 -->
+    <!-- before(前置) 前置增强  切面中的before方法           增强到这个路径下的save()方法这
+                             当指定的save()方法执行时，他就会前置增强(执行切面对象中的before(参数...)方法)
+                                                                        -->
+<!--    <aop:before method="before" pointcut="execution(public void com.itheima.aop.Target.save())" />-->
+    <aop:before method="before" pointcut-ref="myPointcut" />
+    <aop:after-returning method="aftweRetuming" pointcut-ref="myPointcut" />
+
+    <!-- 可多个 -->
+  </aop:aspect>
+</aop:config>
+
+
+  <!--   注解扫描 -->
+  <context:component-scan base-package="com.itheima"/>
+</beans>

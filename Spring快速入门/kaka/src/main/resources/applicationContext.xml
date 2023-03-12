@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+<!--  <bean id="userDao" class="com.itheima.dao.impl.UserDaoImpl" init-method="init" destroy-method="destroy"/>-->
+
+<!--  <bean id="userDao" class="com.itheima.factory.StaticFactory" factory-method="getUserDao"/>-->
+<!--  <bean id="factory" class="com.itheima.factory.DynamicFactory"/>-->
+
+<!--  <bean id="userDao" factory-bean="factory" factory-method="getUserDao"/>-->
+  <import resource="applicationContext-user.xml"/>  <!-- 引入 -->
+  <import resource="applicationContext-product.xml"/> <!-- 引入 -->
+
+
+  <bean id="user1" class="com.itheima.domain.User">
+    <property name="name" value="重中之重"/>
+    <property name="addr" value="在上海"/>
+  </bean>
+  <bean id="user2" class="com.itheima.domain.User">
+    <property name="name" value="案件发酵的"/>
+    <property name="addr" value="在武汉"/>
+  </bean>
+
+  <bean id="userDao" class="com.itheima.dao.impl.UserDaoImpl">
+    <property name="username" value="卡卡"/>  <!-- 普通的类型 -->
+    <property name="age" value="12"/>
+
+    <property name="strList">  <!-- 集合 -->
+      <list>
+        <value>aaaaa</value>
+        <value>bbbbb</value>
+        <value>vvvvv</value>
+      </list>
+    </property>
+    <property name="userMap">
+      <map>
+        <entry key="再看再看" value-ref="user1"/>  <!-- 普通，引用 -->
+        <entry key="大酒店啦" value-ref="user2"/>  <!-- 普通，引用 -->
+      </map>
+    </property>
+    <property name="properties">
+      <props>
+        <prop key="p1">pppppppp1</prop>
+        <prop key="p2">pppppppp3</prop>
+      </props>
+    </property>
+  </bean>
+
+<!--  <bean id="userService" class="com.itheima.service.impl.UserServiceImpl">-->
+<!--    <property name="userDao" ref="userDao"/>  &lt;!&ndash; naem是 UserServiceImpl类中的setUserDao -> userDao-->
+<!--                                                    ref是 UserDaoImpl类 &ndash;&gt;-->
+<!--  </bean>-->
+  <bean id="userService" class="com.itheima.service.impl.UserServiceImpl">
+    <constructor-arg name="userDao" ref="userDao"/>  <!-- 引用类型，通过有参构造注入 -->
+  </bean>
+
+<!--  <bean id="userService2" class="com.itheima.service.impl.UserServiceImpl">-->
+<!--    <constructor-arg name="userDao" ref="userDao"/>  &lt;!&ndash; 引用类型，通过有参构造注入 &ndash;&gt;-->
+<!--  </bean>-->
+</beans>

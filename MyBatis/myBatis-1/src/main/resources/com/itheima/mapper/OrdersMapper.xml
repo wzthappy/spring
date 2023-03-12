@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  <!-- 映射文件DTD约束头 -->
+<!-- namespace: 名称空间 -->
+<mapper namespace="com.itheima.mapper.OrdersMapper">
+  <!-- 多表查询 -->
+
+  <!-- 告诉mybatis    查询要放入对应的值 -->
+  <resultMap id="orderMap" type="com.itheima.domain.Orders">  <!-- orders 表 -->
+    <!-- 手动指定字段与实体属性的映射关系 -->
+    <!-- column：数据表的字段名称.   property：实体的属性名称   -->
+    <!--  就是把 数据表中的数据(column)  一一对应的给到实体类中(property) -->
+    <id column="oid" property="id"/>
+    <result column="ordrtime" property="ordrtime" />
+    <result column="total" property="total" />
+
+<!--    <result column="uid" property="user.id"/>  &lt;!&ndash; 查询出来的数据一一给到order对象中的 User属性中 &ndash;&gt;-->
+<!--    <result column="password" property="user.password"/>  &lt;!&ndash; 没有错误 &ndash;&gt;-->
+<!--    <result column="username" property="user.username"/>-->
+    <!--   或  >>>
+      property:当前实体(orders)中的属性名称(private User user)
+      javaType:当实体(orders)中的属性的类型(User)    -->
+    <association property="user" javaType="com.itheima.domain.User">
+      <id column="uid" property="id"/>
+      <result column="username" property="username"/>
+      <result column="password" property="password"/>
+    </association>
+  </resultMap>
+
+
+  <!-- 一对一 -->
+  <select id="findAll" resultMap="orderMap">  <!-- 查询的结果就按照 orderMap 来封装 -->
+    select *, o.id oid
+    from orders o join user u
+    where o.uid = u.id
+  </select>
+
+
+</mapper>

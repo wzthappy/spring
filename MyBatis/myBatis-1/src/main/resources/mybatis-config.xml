@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+    PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+  <!-- 自定义 别名 配置    配置之后就会程序报错   还是不用了 -->
+<!--  <typeAliases>-->
+<!--    <typeAlias type="com.itheima.domain.Orders" alias="orders"/>-->
+<!--    <typeAlias type="com.itheima.domain.User" alias="user"/>-->
+<!--  </typeAliases>-->
+
+  <!-- 加载对应properties文件 -->
+  <properties resource="jdbc.properties"/>
+
+  <!-- 配置数据库连接环境信息 -->
+  <environments default="development">  <!-- 通过default属性切换不同的environment -->
+    <environment id="development">  <!-- 可多个 -->
+      <transactionManager type="JDBC"/>  <!-- 指定事务管理类型是JDBC -->
+      <dataSource type="POOLED">  <!-- 指定当前 数据源类型 是 连接池 -->
+        <!--数据库连接信息-->
+        <property name="driver" value="${jdbc.driver}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+      </dataSource>
+    </environment>
+  </environments>
+
+  <!-- 配置分页助手插件 -->
+  <!--  <plugins>-->
+<!--    <plugin interceptor="com.github.pagehelper.PageInterceptor" />-->
+<!--  </plugins>-->
+
+  <!-- 加载映射文件 -->
+  <mappers>
+<!--    <mapper resource="com/itheima/mapper/UserMapper.xml"/>-->
+<!--    <mapper resource="com/itheima/mapper/OrdersMapper.xml"/>-->
+
+    <!-- Mapper代理方式 -->
+    <package name="com.itheima.mapper"/>
+  </mappers>
+</configuration>

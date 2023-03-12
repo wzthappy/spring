@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  <!-- 映射文件DTD约束头 -->
+<!-- namespace: 名称空间 -->
+<mapper namespace="com.itheima.mapper.UserMapper">
+  <!-- 多表查询 -->
+  <resultMap id="userMap" type="com.itheima.domain.User">
+    <id column="uid" property="id"/>
+    <result column="username" property="username"/>
+    <result column="password" property="password"/>
+    <!-- 配置集合信息
+         property: 集合名称
+         ofType: 当前集合中的数据类型
+    -->
+    <collection property="ordersList" ofType="com.itheima.domain.Orders">
+      <!-- 封装Order的数据 -->
+      <id column="oid" property="id"/>
+      <result column="ordrtime" property="ordrtime"/>
+      <result column="total" property="total"/>
+    </collection>
+  </resultMap>
+
+  <!-- 一对多 -->
+  <select id="findAll2" resultMap="userMap">  <!-- 按照resultMap进行封装 -->
+    select *, o.id oid
+    from user u join orders o
+    where u.id = o.uid;
+  </select>
+  <!-- +++++++++++++++++++++++++== -->
+  <resultMap id="userRoleMap" type="com.itheima.domain.User">
+    <!-- user的信息 -->
+    <id column="userId" property="id"/>
+    <result column="username" property="username"/>
+    <result column="password" property="password"/>
+
+    <!-- user内部的roleList信息 -->
+    <collection property="roleList" ofType="com.itheima.domain.Role">
+      <id column="roleId" property="id" />
+      <result column="rolename" property="rolename" />
+    </collection>
+  </resultMap>
+
+  <!-- 多对多 -->
+  <select id="findUserAndRoleAll" resultMap="userRoleMap">
+    select *
+    from user u
+           join `sys-user-role` ur
+                on u.id = ur.userId
+           join role r
+                on r.id = ur.roleId
+  </select>
+
+
+  <!-- 修改 -->
+  <update id="update">
+    update user
+    set username = #{username},
+        password = #{password}
+    where id = #{id}
+  </update>
+
+</mapper>
